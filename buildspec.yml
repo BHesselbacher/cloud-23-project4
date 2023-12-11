@@ -1,0 +1,22 @@
+version 0.2
+
+phases:
+  install:
+    commands:
+      #Download NodeJS & npm
+      - curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
+      #Install NodeJS & npm
+      - apt-get install -y ca-certificates curl gnupg
+  pre_build:
+    commands:
+      #Install the react/NodeJS dependencies
+      - npm install
+  build:
+    commands:
+      #Transform ReactJS code to static html/js/
+      - npm run build
+artifacts:
+  files:
+    - "**/*"
+  discard-paths: no
+  base-directory: build
